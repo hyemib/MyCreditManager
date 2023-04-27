@@ -17,7 +17,7 @@ struct Student: InputProtocol {
     mutating func addStudent() {
         guard let inputStudent = readInput(prompt: "추가할 학생의 이름을 입력해주세요") else { return }
         
-        if studentInfo.keys.contains(inputStudent) {
+        if let _ = studentInfo[inputStudent]  {
             print("\(inputStudent)는 이미 존재하는 학생입니다. 추가하지 않습니다.")
             return
         }
