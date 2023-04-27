@@ -35,7 +35,7 @@ struct Grade: InputProtocol {
         
         guard let inputGrade = readInput(prompt: prompt)?.components(separatedBy: " ") else { return }
       
-        if inputGrade.count != 3 || !studentInfo.keys.contains([inputGrade[0]]) || !grades.keys.contains(inputGrade[2]) {
+        guard inputGrade.count == 3, var _ = studentInfo[inputGrade[0]], let _ = grades[inputGrade[2]] else {
             print("입력이 잘못되었습니다. 다시 확인해주세요.")
             return
         }
@@ -52,17 +52,17 @@ struct Grade: InputProtocol {
         
         guard let inputGrade = readInput(prompt: prompt)?.components(separatedBy: " ") else { return }
         
-        if !studentInfo.keys.contains([inputGrade[0]]) {
+        guard let studentName = studentInfo[inputGrade[0]] else {
             print("\(inputGrade[0]) 학생을 찾지 못했습니다.")
             return
         }
         
-        if inputGrade.count != 2 || !studentInfo[inputGrade[0]]!.keys.contains([inputGrade[1]]) {
+        guard inputGrade.count == 2, let _ = studentName[inputGrade[1]] else {
             print("입력이 잘못되었습니다. 다시 확인해주세요.")
             return
         }
         
-        studentInfo[inputGrade[1]] = nil
+        studentInfo[inputGrade[0]]?[inputGrade[1]] = nil
         print("\(inputGrade[0]) 학생의 \(inputGrade[1]) 과목의 성적이 삭제되었습니다.")
     }
 
@@ -85,6 +85,6 @@ struct Grade: InputProtocol {
         }
         
         let gradeAverage = gradeSum / Double(subjectAndGrade.count)
-        print("평점: \(String(format: "%.2f", gradeAverage))")
+        print("평점: \(subjectAndGrade.count == 0 ? "0" : String(format: "%.2f", gradeAverage))")
     }
 }
