@@ -10,6 +10,8 @@
 		9204827029F565000015A02F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9204826F29F565000015A02F /* main.swift */; };
 		9204827729F8419E0015A02F /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9204827629F8419E0015A02F /* Student.swift */; };
 		9204827929F841A60015A02F /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9204827829F841A60015A02F /* Grade.swift */; };
+		9204827B29FACF270015A02F /* MyCreditManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9204827A29FACF270015A02F /* MyCreditManager.swift */; };
+		9204827D29FACFE20015A02F /* InputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9204827C29FACFE20015A02F /* InputProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +31,8 @@
 		9204826F29F565000015A02F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9204827629F8419E0015A02F /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		9204827829F841A60015A02F /* Grade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
+		9204827A29FACF270015A02F /* MyCreditManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCreditManager.swift; sourceTree = "<group>"; };
+		9204827C29FACFE20015A02F /* InputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 				9204826F29F565000015A02F /* main.swift */,
 				9204827629F8419E0015A02F /* Student.swift */,
 				9204827829F841A60015A02F /* Grade.swift */,
+				9204827A29FACF270015A02F /* MyCreditManager.swift */,
+				9204827C29FACFE20015A02F /* InputProtocol.swift */,
 			);
 			path = MyCreditManager;
 			sourceTree = "<group>";
@@ -126,7 +132,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9204827B29FACF270015A02F /* MyCreditManager.swift in Sources */,
 				9204827029F565000015A02F /* main.swift in Sources */,
+				9204827D29FACFE20015A02F /* InputProtocol.swift in Sources */,
 				9204827729F8419E0015A02F /* Student.swift in Sources */,
 				9204827929F841A60015A02F /* Grade.swift in Sources */,
 			);
