@@ -12,8 +12,10 @@ protocol InputProtocol {
 }
    
 struct MyCreditManager {
+    var studentInfo = [String:[String:String]]()
+    
     var student = Student()
-    let grade = Grade()
+    var grade = Grade()
 
     mutating func runProgram(_ input: String) {
         guard let menu = Int(input), (1...5).contains(menu) else {
@@ -21,17 +23,25 @@ struct MyCreditManager {
             return
         }
         
-        switch Int(input)! {
+        student.studentInfo = studentInfo
+        grade.studentInfo = studentInfo
+        
+        switch menu {
         case 1:
             student.addStudent()
+            studentInfo = student.studentInfo
         case 2:
             student.removeStudent()
+            studentInfo = student.studentInfo
         case 3:
             grade.addGrade()
+            studentInfo = grade.studentInfo
         case 4:
             grade.removeGrade()
+            studentInfo = grade.studentInfo
         case 5:
             grade.readGrade()
+            studentInfo = grade.studentInfo
         default:
             print("입력이 잘못되었습니다. 다시 확인해주세요.")
         }

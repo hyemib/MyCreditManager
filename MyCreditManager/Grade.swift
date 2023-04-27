@@ -2,7 +2,8 @@
 import Foundation
 
 struct Grade: InputProtocol {
-    let student = Student()
+    var studentInfo = [String:[String:String]]()
+    
     var grades: [String : Double] = [
         "A+" : 4.5,
         "A" : 4.0,
@@ -25,41 +26,55 @@ struct Grade: InputProtocol {
         return input
     }
     
-    func addGrade() {
+    mutating func addGrade() {
         let prompt = """
         성적을 추가할 학생의 이름, 과목 이름, 성적(A+, A, F 등)을 띄어쓰기로 구분하여 차례로 작성해주세요.
         입력예) Mickey Swift A+
         만약에 학생의 성적 중 해당 과목이 존재하면 기존 점수가 갱신됩니다.
         """
-
-        guard let inputGrade = readInput(prompt: prompt)?.components(separatedBy: " "), inputGrade.count == 3, student.students[inputGrade[0]] != nil, grades[inputGrade[2]] != nil else {
+        
+        guard let inputGrade = readInput(prompt: prompt)?.components(separatedBy: " ") else { return }
+      
+        if inputGrade.count != 3 || !studentInfo.keys.contains([inputGrade[0]]) || !grades.keys.contains(inputGrade[2]) {
             print("입력이 잘못되었습니다. 다시 확인해주세요.")
             return
         }
-        var studentName = student.students[inputGrade[0]]
-        studentName?[inputGrade[1]] = inputGrade[2]
+   
+        studentInfo[inputGrade[0]]?[inputGrade[1]] = inputGrade[2]
         print("\(inputGrade[0]) 학생의 \(inputGrade[1]) 과목이 \(inputGrade[2])로 추가(변경)되었습니다.")
     }
 
-    func removeGrade() {
+    mutating func removeGrade() {
         let prompt = """
         성적을 삭제할 학생의 이름, 과목 이름을 띄어쓰기로 구분하여 차례로 작성해주세요.
         입력 예시) Mickey Swift
         """
         
-        guard let inputGrade = readInput(prompt: prompt)?.components(separatedBy: " "),
-              inputGrade.count == 2,
-              var student = student.students[inputGrade[0]],
-              student[inputGrade[1]] != nil else { return }
+        guard let inputGrade = readInput(prompt: prompt)?.components(separatedBy: " ") else { return }
         
-        student[inputGrade[1]] = nil
+        if !studentInfo.keys.contains([inputGrade[0]]) {
+            print("\(inputGrade[0]) 학생을 찾지 못했습니다.")
+            return
+        }
+        
+        if inputGrade.count != 2 || !studentInfo[inputGrade[0]]!.keys.contains([inputGrade[1]]) {
+            print("입력이 잘못되었습니다. 다시 확인해주세요.")
+            return
+        }
+        
+        studentInfo[inputGrade[1]] = nil
         print("\(inputGrade[0]) 학생의 \(inputGrade[1]) 과목의 성적이 삭제되었습니다.")
     }
 
     func readGrade() {
         let prompt = "평점을 알고 싶은 학생의 이름을 입력해주세요."
         
-        guard let inputStudent = readInput(prompt: prompt), let student = student.students[inputStudent] else { return }
+        guard let inputStudent = readInput(prompt: prompt) else { return }
+        
+        guard let student = studentInfo[inputStudent] else {
+            print("\(inputStudent) 학생을 찾지 못했습니다.")
+            return
+        }
         
         let subjectAndGrade = student.sorted(by: <)
         var gradeSum: Double = 0
